@@ -1,0 +1,142 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+struct node{
+	char data;
+	struct node * next;
+};
+
+struct node *head = NULL;
+int size = 0;
+
+void invalidInput(){
+	fprintf(stderr,"Input not valid\n");
+}
+
+void Push(char newData){																						
+	int ascValue;
+	if((int)newData<65 || (int)newData>90){
+		printf("%c",newData);
+		invalidInput();
+	}else{
+		struct node * newNode = malloc(sizeof(struct node));
+		newNode -> data = newData;
+		newNode -> next = head;
+		head = newNode;
+		size++;	
+	}
+}
+
+void Length(){
+	if(head == NULL){
+		invalidInput();
+	}else{
+		printf("%d\n",size);	
+	}
+}
+//working on
+void Remove(char deleteData){
+	printf("WHY");
+	int flag = 0;
+	if(head == NULL){
+		invalidInput();
+		flag = 1;
+	}else if(head -> data == deleteData){
+		head = head -> next;
+		flag = 1;
+	}else{
+		struct node *current = head;
+		while(flag == 0 && current != NULL){
+			if(current -> next -> data == deleteData){
+				current -> next = current -> next -> next;
+				flag = 1;
+			}	
+			current = current -> next;
+		}
+	}
+	if(flag == 0){
+		invalidInput();
+	}else if (flag == 1){
+		size--;
+	}
+}
+
+void Tail(){
+	if(head == NULL){
+		invalidInput();
+	}else{
+		struct node * current = head;
+		while(current -> next != NULL){
+			current = current -> next;
+		}
+		printf("%c\n",current -> data);
+	}
+}
+
+void Head(){
+	if(head == NULL){
+		invalidInput();
+	}else{
+		printf("%c\n",head -> data);	
+	}
+}
+
+void PrintList(){
+	if(head == NULL){
+		printf("-\n");
+	}else{
+		char listOfData;
+		struct node * current = head;
+		while(current != NULL){
+			printf("%c",current->data);
+			if(current -> next != NULL){
+				printf("-");
+			}
+		current = current->next;
+		}
+		printf("\n");
+	}
+}
+
+void main(int argc, char *argv[]){
+	//char const * const fileName = argv[1];
+	char const * const fileName = "test";
+	FILE * file = fopen(fileName,"r");
+	char line[256];
+
+	char * command;
+	char * data;
+
+	while(fgets(line,sizeof(line),file)){
+		fprintf(stderr,"invalidInputadfdsafdasf\n");
+		if(line != '\0'){
+			line[strcspn(line, "\r\n")] = 0;
+	        command=strtok(line, " ");
+			if(strcmp(command,"Push") == 0){
+				data=strtok(NULL, " ");
+				Push(data[0]);
+				printf("hope\n");
+			}else if(strcmp(command,"Remove") == 0){
+				data=strtok(NULL, " ");
+				Remove(data[0]);
+				printf("success\n");
+			}else{
+				if(strcmp(command,"Length") == 0){
+					Length();
+				}else if(strcmp(command,"PrintList") == 0){
+					PrintList();
+				}else if(strcmp(command,"Head") == 0){
+					Head();
+				}else if(strcmp(command,"Tail") == 0){
+					Tail();
+				}else{
+					invalidInput();
+				}
+			}
+		}
+
+		
+	}
+	fclose(file);
+}
