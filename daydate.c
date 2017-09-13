@@ -1,6 +1,4 @@
 /*
-*Jia-Cong Hou
-*3565155
 *Operating System - Prac 1
 *
 *Includes the system library below for uses in our program
