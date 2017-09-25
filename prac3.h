@@ -118,3 +118,23 @@ void Remove(struct node ** ptpt, char data){
 		SIZE--;
 	}
 }
+
+void Head(){
+	if(HEAD == NULL){
+		InvalidInput();
+	}else{
+		printf("%c\n", HEAD -> data);
+	}
+}
+
+void Tail(){
+	if(HEAD == NULL){
+		InvalidInput();
+	}else{
+		struct node * current = HEAD;
+		while(current -> next != NULL){
+			current = current -> next;
+		}
+		printf("%c\n", current -> data);
+	}
+}
