@@ -24,4 +24,6 @@ int main(int argc, char * argv[]){
 	Remove(&HEAD,'C');
 	PrintList();
 	Length();
+	Head();
+	Tail();
 }
