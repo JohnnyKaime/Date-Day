@@ -1,0 +1,21 @@
+Length
+Push A
+Push B
+Push C
+PrintList
+Length
+Append Z
+Append Y
+PrintList
+Length
+InsertBefore X C
+PrintList
+Length
+InsertAfter D D
+PrintList
+Length
+Remove C
+PrintList
+Length
+Head
+Tail
