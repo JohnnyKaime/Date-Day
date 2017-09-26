@@ -3,7 +3,8 @@
 *3565155
 *Prac3 - Linkedlist using pointer - pointer
 *File - error.h
-*Header file that linkes to error.c used in the driver
+*
+*Header file that links to error.c used in the driver
 *main.c, serves as a "interface" to call each functions
 *defined below
 *********************************************************/

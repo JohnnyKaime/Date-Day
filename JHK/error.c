@@ -16,6 +16,7 @@
 #include "error.h"
 /*
 *Description:
+*Prints out input no valid to standard error "stderr"
 *
 *Input:
 *Nothing
@@ -25,8 +26,9 @@
 *Displays Input not valid to standard error
 *
 *Caveats:
-*Only accepts char as data inputs
+*None
 */
 void InvalidInput(){
+	/*Display error message and a new line*/
 	fprintf(stderr,"Input not valid\n");
 }
