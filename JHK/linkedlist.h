@@ -2,13 +2,10 @@
 #include <string.h>
 #include <stdlib.h>
 #include "node.h"
+#include "error.h"
 
 struct node * HEAD = NULL;
 int SIZE = 0;
-//Error msg
-void InvalidInput(){
-	fprintf(stderr,"Input not valid\n");
-}
 
 //Add to head
 void Push(struct node ** ptpt, char data){
@@ -24,9 +21,9 @@ void Push(struct node ** ptpt, char data){
 }
 //Bingo
 void InsertBefore(struct node * ptpt, char data){
-	if(ptpt == NULL || data < 65 || data > 90){
+	if(data < 65 || data > 90 || HEAD == NULL){
 		InvalidInput();
-	}else if(ptpt == HEAD){
+	}else if(ptpt == NULL){
 		Push(&HEAD,data);
 	}else{
 		Push(&(ptpt)->next,data);
@@ -34,18 +31,20 @@ void InsertBefore(struct node * ptpt, char data){
 }
 //Bingo 
 void InsertAfter(struct node * ptpt, char data){
-	struct node * last = HEAD;
-	while(last -> next != NULL){
-		last = last -> next;
-	}
-	if(ptpt == NULL || data < 65 || data > 90){
+	if(data < 65 || data > 90 || HEAD == NULL){
 		InvalidInput();
-	}else if(ptpt == last){
-		Push(&last,data);
-	}else if(ptpt == HEAD){
-		Push(&(ptpt)->next,data);
+	}else if(ptpt == NULL){
+		Push(&HEAD->next,data);
 	}else{
-		Push(&(ptpt)->next->next,data);
+		struct node * last = HEAD;
+		while(last -> next != NULL){
+			last = last -> next;
+		}
+		if(ptpt == last){
+			Push(&last,data);
+		}else{
+			Push(&(ptpt)->next->next,data);
+		}
 	}
 }
 
@@ -92,17 +91,17 @@ void Length(){
 //Returns the previous node before the node with the exact match
 //If it happens to be the first node or head node then return that rather
 struct node * Find(struct node ** ptpt, char data){
-	if(ptpt == NULL){
-		return NULL;
+	if(ptpt == NULL || HEAD == NULL){
+		return 0;
 	}else if((*ptpt) -> data == data){
-		return *ptpt;
+		return NULL;
 	}else{
 		struct node * current = *ptpt;
 		while(current -> next != NULL && current -> next -> data != data){
 			current = current -> next;
 		}
 		if(current -> next== NULL){
-			return NULL;
+			return 0;
 		}else{
 			return current;
 		}
@@ -117,8 +116,13 @@ void Remove(struct node ** ptpt, char data){
 		SIZE--;
 	}else{
 		struct node * delete = Find(ptpt,data);
-		delete -> next = delete -> next -> next;
-		SIZE--;
+		if(delete != NULL){
+			delete -> next = delete -> next -> next;
+			SIZE--;
+		}else{
+			InvalidInput();
+		}
+
 	}
 }
 
@@ -141,3 +145,4 @@ void Tail(){
 		printf("%c\n", current -> data);
 	}
 }
+

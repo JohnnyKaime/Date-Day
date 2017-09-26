@@ -1,39 +1,13 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
 #include "linkedlist.h"
+#include "error.h"
 
 int main(int argc, char * argv[]){
-	/*PrintList();
-	Length();
-	Push(&HEAD,'A');
-	Push(&HEAD,'B');
-	Push(&HEAD,'C');
-	PrintList();
-	Length();
-	Append(&HEAD,'Z');
-	Append(&HEAD,'Y');
-	PrintList();
-	Length();
-	InsertBefore(Find(&HEAD,'C'),'X');
-	PrintList();
-	Length();
-	InsertAfter(Find(&HEAD,'D'),'D');
-	PrintList();
-	Length();
-	Remove(&HEAD,'C');
-	PrintList();
-	Length();
-	Head();
-	Tail();*/
-	
 	char const * const fileName = argv[1];
 	FILE * file = fopen(fileName,"r");
 	char line[256];
 	while(fgets(line,sizeof(line),file)){
 		line[strcspn(line,"\r\n")] = 0;
 		char * command = strtok(line," ");
-		//printf("%s\n",command);
 		if(command != NULL){
 			if(strcmp(command, "InsertAfter") == 0){
 				char * dataA = strtok(NULL, " ");

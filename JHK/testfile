@@ -1,21 +1,10 @@
-Length
-Push A
-Push B
-Push C
-PrintList
-Length
-Append Z
 Append Y
+Append O
+Append U
+Append R
+Append O
+Append C
+Append K
+InsertBefore L R
+Remove R
 PrintList
-Length
-InsertBefore X C
-PrintList
-Length
-InsertAfter D D
-PrintList
-Length
-Remove C
-PrintList
-Length
-Head
-Tail
