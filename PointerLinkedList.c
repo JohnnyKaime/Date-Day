@@ -1,4 +1,5 @@
 /*
+*Linked list
 *
 *Includes the system library below for uses in our program
 */
@@ -28,7 +29,8 @@
 *Nothing
 *
 *Output:
-*Nothing
+*Returns nothing
+*But creates a node
 *
 *Caveats:
 *Only accepts char as data inputs
@@ -37,27 +39,28 @@ struct node{
 	char data;
 	struct node * next;
 };
-//Global variable head
-//head is always available to all functions
-//head - type node, stores the very first node in the list
+/*Global variable head*/
+/*head is always available to all functions*/
+/*head - type node, stores the very first node in the list*/
 struct node *head = NULL;
-//Global variable size
-//size is always available to all functions
-//size - type int, stores the size of the list
+/*Global variable size*/
+/*size is always available to all functions*/
+/*size - type int, stores the size of the list*/
 int size = 0;
-	/*
-	*Description: invalidInput
-	*Prints out input no valid to standard error "stderr"
-	*
-	*Input:
-	*Nothing
-	*
-	*Output:
-	*Nothing
-	*
-	*Caveats:
-	*Nothing
-	*/
+/*
+*Description: invalidInput
+*Prints out input no valid to standard error "stderr"
+*
+*Input:
+*Nothing
+*
+*Output:
+*Returns nothing
+*Prints out standard error message
+*
+*Caveats:
+*Nothing
+*/
 void invalidInput(){
 	fprintf(stderr,"Input not valid\n");
 }
@@ -78,27 +81,28 @@ void invalidInput(){
 *		 - a ASCI representation of the character
 *
 *Output:
-*Nothing
+*Returns nothing
+*Creates a new node and puts it to the front of list
 *
 *Caveats:
 *Only accpets data between A ~ Z
 *No integers, data must be in capital, and a single character
 */
 void Push(char newData){
-	//Checks if data is within range A ~ Z
+	/*Checks if data is within range A ~ Z*/
 	if(newData<65 || newData>90){
 		invalidInput();
 	}else{
-		//Allocates memory to a newly created node
-		//With default values of nothing
+		/*Allocates memory to a newly created node*/
+		/*With default values of nothing*/
 		struct node * newNode = malloc(sizeof(struct node));
-		//Updates data of the new node
+		/*Updates data of the new node*/
 		newNode -> data = newData;
-		//Updates the next node of new node to become head
+		/*Updates the next node of new node to become head*/
 		newNode -> next = head;
-		//Sets new node to head
+		/*Sets new node to head*/
 		head = newNode;
-		//Increase the size of the list
+		/*Increase the size of the list*/
 		size++;
 	}
 }
@@ -110,7 +114,8 @@ void Push(char newData){
 *Prints out the size of the list
 *
 *Input:
-*Nothing
+*Returns nothing
+*Prints out length of the list
 *
 *Output:
 *Nothing, but prints out size of the list
@@ -149,47 +154,48 @@ void Length(){
 *
 *Output:
 *Nothing
+*A node is either removed or error message is printed out
 *
 *Caveats:
 *Only accpets data between A ~ Z
 *No integers, data must be in capital, and a single character
 */
 void Remove(char deleteData){
-	//Flag for operation
+	/*Flag for operation*/
 	int flag = 0;
-	//Checks if data is within range A ~ Z
-	//Checks if head is empty
+	/*Checks if data is within range A ~ Z*/
+	/*Checks if head is empty*/
 	if(head == NULL || deleteData<65 || deleteData>90){
 		flag = 0;
 	}else if(head -> data == deleteData){
-		//Updates head to the new node
+		/*Updates head to the new node*/
 		head = head -> next;
 		flag = 1;
 	}else{
-		//Creates a node current, starting position at head
+		/*Creates a node current, starting position at head*/
 		struct node *current = head;
-		//Only loops if a node has not been deleted
-		//Loops until end of file has been reach and delete has been performed
-		while(flag == 0 && current != NULL){
-			//Since we checked the head node we can safely just check the 2nd node onwards
-			//If 2nd node and onwards matches data
+		/*Only loops if a node has not been deleted*/
+		/*Loops until end of file has been reach and delete has been performed*/
+		while(flag == 0 && current -> next != NULL){
+			/*Since we checked the head node we can safely just check the 2nd node onwards*/
+			/*If 2nd node and onwards matches data*/
 			if(current -> next -> data == deleteData){
-				//Update next node of current to the next next node
+				/*Update next node of current to the next next node*/
 				current -> next = current -> next -> next;
-				//Set delete performed flag to true/1
+				/*Set delete performed flag to true/1*/
 				flag = 1;
 			}
-			//Go to next node
+			/*Go to next node*/
 			current = current -> next;
 		}
 	}
-	//If no deletion has been performed
-	//Call invalidInput function
+	/*If no deletion has been performed*/
+	/*Call invalidInput function*/
 	if(flag == 0){
 		invalidInput();
 	}else if (flag == 1){
-		//Deletion has been performed
-		//Size of the lis is decreased
+		/*Deletion has been performed*/
+		/*Size of the lis is decreased*/
 		size--;
 	}
 }
@@ -204,22 +210,23 @@ void Remove(char deleteData){
 *Nothing
 *
 *Output:
+*Returns nothing
 *Prints out last node
 *
 *Caveats:
 *Nothing
 */
 void Tail(){
-	//Checks if head is empty
+	/*Checks if head is empty*/
 	if(head == NULL){
 		invalidInput();
 	}else{
-		//Creates node at head position
+		/*Creates node at head position*/
 		struct node * current = head;
-		//Loops through until just before end of list
-		//aka Last node
+		/*Loops through until just before end of list*/
+		/*aka Last node*/
 		while(current -> next != NULL){
-			//Go to next node
+			/*Go to next node*/
 			current = current -> next;
 		}
 		printf("%c\n",current -> data);
@@ -235,6 +242,7 @@ void Tail(){
 *Nothing
 *
 *Output:
+*Returns nothing
 *Prints out first node
 *
 *Caveats:
@@ -260,28 +268,29 @@ void Head(){
 *Nothing
 *
 *Output:
+*Returns nothing
 *Prints out first node
 *
 *Caveats:
 *Nothing
 */
 void PrintList(){
-	//Checks if head is empty
+	/*Checks if head is empty*/
 	if(head == NULL){
-		//List is empty
+		/*List is empty*/
 		printf("-\n");
 	}else{
-		//Creates a node at position head
+		/*Creates a node at position head*/
 		struct node * current = head;
-		//Loops through until end of list
+		/*Loops through until end of list*/
 		while(current != NULL){
-			//Prints data and "-"
+			/*Prints data and "-"*/
 			printf("%c",current->data);
 			if(current -> next != NULL){
-				//Doesnt print "-" cause its not the end of list yet
+				/*Doesnt print "-" cause its not the end of list yet*/
 				printf("-");
 			}
-		//Go to next node
+		/*Go to next node*/
 		current = current->next;
 		}
 		printf("\n");
@@ -305,64 +314,70 @@ void PrintList(){
 *
 *Output:
 *Nothing
+*Follows commands and executes accordingly
 *
 *Caveats:
 *Only accepts file names
 *Memory might run out
 */
-void main(int argc, char *argv[]){
-	//Takes in file name
+int main(int argc, char *argv[]){
+	/*Takes in file name*/
 	char const * const fileName = argv[1];
-	//Reads file
+	/*Reads file*/
 	FILE * file = fopen(fileName,"r");
-	//Create a large line, type char array to store each line of the file
+	/*Create a large line, type char array to store each line of the file*/
 	char line[256];
-	//Loop until end of file
+	/*Loop until end of file*/
 	while(fgets(line,sizeof(line),file)){
-		//Replace all new lines with NULL or 0
-		//0 is not equal to '0'
+	/*Replace all new lines with NULL or 0*/
+	/*0 is not equal to '0'*/
         line[strcspn(line, "\r\n")] = 0;
-        //Use string token to strip out everything before the " "
-        //This is the command part
+        /*Use string token to strip out everything before the " "*/
+        /*This is the command part*/
         char * command=strtok(line, " ");
-        //Checks if command is equal to Push
-        if(strcmp(command,"Push") == 0){
-        	//Use string token to strip out everything after he " "
-            char * data=strtok(NULL, " ");
-            //Calls Push function
-            //Push takes in single char
-            Push(data[0]);
-        //Checks if command is equal to Remove
-        }else if(strcmp(command,"Remove") == 0){
-        	//Use string token to strip out everything after he " "
-			char * data=strtok(NULL, " ");
-			//Calls Remove function
-            //Remove takes in single char
-            Remove(data[0]);
-        }else{
-        	//Checks if command is equal to Length
-            if(strcmp(command,"Length") == 0){
-            	//Calls Length function
-                Length();
-            //Checks if command is equal to PrintList
-            }else if(strcmp(command,"PrintList") == 0){
-            	//Calls PrintList function
-                PrintList();
-            //Checks if command is equal to Head
-            }else if(strcmp(command,"Head") == 0){
-            	//Calls Head function
-                Head();
-            //Checks if command is equal to Tail
-            }else if(strcmp(command,"Tail") == 0){
-            	//Calls Tail function
-                Tail();
-            }else{
-            	//Command doesnt match any of the other
-            	//Calls invalidInput function
-                invalidInput();
-            }
-        }
+	if(command != NULL){
+		/*Checks if command is equal to Push*/
+	        if(strcmp(command,"Push") == 0){
+		    /*Use string token to strip out everything after he " "*/
+	            char * data=strtok(NULL, " ");
+	            /*Calls Push function*/
+	            /*Push takes in single char*/
+	            Push(data[0]);
+	        /*Checks if command is equal to Remove*/
+	        }else if(strcmp(command,"Remove") == 0){
+	            /*Use string token to strip out everything after he " "*/
+		    char * data=strtok(NULL, " ");
+		    /*Calls Remove function*/
+	            /*Remove takes in single char*/
+	            Remove(data[0]);
+	        }else{
+	            /*Checks if command is equal to Length*/
+	            if(strcmp(command,"Length") == 0){
+	            	/*Calls Length function*/
+	                Length();
+	            /*Checks if command is equal to PrintList*/
+	            }else if(strcmp(command,"PrintList") == 0){
+	            	/*Calls PrintList function*/
+	                PrintList();
+	            /*Checks if command is equal to Head*/
+	            }else if(strcmp(command,"Head") == 0){
+	            	/*Calls Head function*/
+	                Head();
+	            /*Checks if command is equal to Tail*/
+	            }else if(strcmp(command,"Tail") == 0){
+	            	/*Calls Tail function*/
+	                Tail();
+	            }else{
+	            	/*Command doesnt match any of the other*/
+	            	/*Calls invalidInput function*/
+	                invalidInput();
+	            }
+	        }
+	}else{
+		invalidInput();
 	}
-	//Best practise to close file
+	}
+	/*Best practise to close file*/
 	fclose(file);
+return 0;
 }
