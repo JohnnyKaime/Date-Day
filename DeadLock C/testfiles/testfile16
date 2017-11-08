@@ -1,0 +1,8 @@
+clear
+kill A
+A requests R
+B requests S
+C requests R
+C requests S
+A requests S
+kill B

@@ -1,0 +1,18 @@
+A requests R
+B requests S
+C requests T
+D requests U
+E requests V
+A requests S
+A requests T
+B requests T
+C requests U
+D requests V
+E requests R
+kill C
+B releases S
+A requests V
+D requests T
+B requests U
+kill E
+kill A

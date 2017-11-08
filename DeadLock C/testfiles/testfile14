@@ -1,0 +1,8 @@
+A requests A
+B requests B
+C requests C
+A requests B
+A requests C
+B requests C
+C requests A
+kill C

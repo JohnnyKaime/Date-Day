@@ -1,0 +1,9 @@
+A requests A
+B requests B
+A requests B
+B requests A
+B releases A
+B releases B
+A releases A
+A requests A
+B requests B

@@ -1,0 +1,12 @@
+clear
+A requests R
+B requests S
+A requests S
+B requests R
+clear
+A requests R
+B requests S
+C requests R
+C requests S
+A requests S
+B releases S

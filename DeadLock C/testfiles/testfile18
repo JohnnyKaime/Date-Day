@@ -1,0 +1,20 @@
+A requests A 
+B requests B
+A requests B
+C requests C
+B requests C
+D requests D
+C requests D
+E requests E
+D requests E
+F requests F
+E requests F
+A requests F
+B requests A
+kill B
+E requests A
+B requests F
+F releases F
+kill E
+D requests F
+A requests C

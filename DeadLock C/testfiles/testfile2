@@ -1,0 +1,8 @@
+A releases B
+A requests B
+A releases B
+A releases B
+A requests R
+A requests R
+clear
+A releases R

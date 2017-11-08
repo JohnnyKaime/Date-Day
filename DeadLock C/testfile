@@ -1,0 +1,14 @@
+A requests R
+B requests S
+C requests T
+D requests A
+A requests S
+B requests T
+C requests A
+D requests R 
+A releases R
+A requests A
+B requests A
+kill D
+kill C
+clear
