@@ -30,7 +30,7 @@
 *None
 */
 void InvalidInput(){
-	/*Display error message and a new line*/
+	/*Display error message on a new line*/
 	fprintf(stderr,"Input not valid\n");
 }
 /*
@@ -48,5 +48,6 @@ void InvalidInput(){
 *None
 */
 void deadLock(){
+	/*Display dead lock message on a new line*/
 	fprintf(stdout,"deadlock\n");
 }
